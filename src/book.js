@@ -6,11 +6,12 @@ class Book extends Component{
         return(
             <div>
                 
-                {books.length ?  
+                {books&& books.length ?  
                 <ol className="books-grid">
-                    {console.log(books)}
-                    {books.filter(obj=> obj.shelf === status).map((book) => (
-
+                    {
+                    books
+                    .filter(obj=> obj.shelf === status)
+                    .map((book) => (
                         <li key={book.id}>
                         <div className="book">
                             <div className="book-top">
@@ -26,10 +27,11 @@ class Book extends Component{
                             </div>
                             </div>
                             <div className="book-title">{book.title}</div>
-                            {book.authors.map(obj => (<div key={obj} className="book-authors">{obj}</div>))}    
+                            {book.authors && book.authors.map(obj => (<div key={obj} className="book-authors">{obj}</div>))}    
                         </div>
                     </li>
-                     ) )}
+                     ) )
+                     }
                     
                 </ol> : "loading"}
             </div>

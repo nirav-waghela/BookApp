@@ -11,24 +11,22 @@ class Search extends Component{
     }
 
     querySearch = (e) =>{
-        
         this.setState({
                 search:e.target.value
         })
-        console.log(this.state.search)
         if(this.state.search.length){
-
-            BooksAPI.search(this.state.search).then(books=>{   
-                console.log(books)      
-                const newBooks = books && books.length && books.map(obj=>{
-                    return {...obj, shelf:'none'}
-                })   
-                this.setState({
-                    books: newBooks.length ? newBooks : this.state.books
-                })           
-                console.log(this.state.books);
-                 
-            })
+            BooksAPI.search(this.state.search).then((books) => {
+                if (! (books && books.error)) {
+                  const newBooks = books && books.length && books.map(
+                      (obj) => {
+                        return { ...obj, shelf: "none" };
+                      }
+                    );
+                    this.setState({
+                        books: newBooks && newBooks.length ? newBooks : []
+                    })
+                }
+            });
             
         }
     
