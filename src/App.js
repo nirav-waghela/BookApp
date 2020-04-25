@@ -20,6 +20,10 @@ class BooksApp extends React.Component {
   }
   
   componentDidMount(){
+   this.getBooks()
+  }
+
+  getBooks = () => {
     BooksAPI.getAll().then((books)=>{
       this.setState(()=>({
         books
@@ -28,16 +32,22 @@ class BooksApp extends React.Component {
   }
 
   changeStatus = (Book , value) => {  
-    BooksAPI.update(Book , value).then()  
-    for(let i=0 ; i < this.state.books.length ; i++){
-      if(this.state.books[i].id === Book.id){
-        this.state.books[i].shelf = value;
-      }
-    }
+    console.log(Book , value);
+    
+    BooksAPI.update(Book , value).then(
+      this.getBooks()
+    )  
+    // for(let i=0 ; i < this.state.books.length ; i++){
+    //   if(this.state.books[i].id === Book.id){
+    //     this.state.books[i].shelf = value;
+    //   }
+    // }
 
-    this.setState(()=>({
-      books: this.state.books
-    }))
+    // this.setState(()=>({
+    //   books: this.state.books
+    // }))
+    // console.log(this.state.books,"khsdafgdgsh");
+    
   }
 
   render() {
@@ -45,7 +55,7 @@ class BooksApp extends React.Component {
     
     return (
       <div className="app">
-        <Route path = '/search' component={Search} />
+        <Route path = '/search' ><Search changeStatus={this.changeStatus}/></Route>
         <Route exact path='/' render={()=>(
           <div className="list-books">
           <div className="list-books-title">

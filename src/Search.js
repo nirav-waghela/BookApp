@@ -33,6 +33,7 @@ class Search extends Component{
         
     }
     render(){
+        const { changeStatus } = this.props
 
         return (
             <div>   
@@ -50,6 +51,7 @@ class Search extends Component{
                         <Book 
                             books = {this.state.books}
                             status = 'none'
+                            changeStatus={changeStatus}
                         />
                     </div>
                 </div>
