@@ -27,7 +27,7 @@ class BooksApp extends React.Component {
 
   changeStatus = (Book, value) => {
     BooksAPI.update(Book, value).then(
-      this.getBooks()
+      books => this.getBooks()
     )
   }
 
